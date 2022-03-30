@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Page Title</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+<body>
+  <div class="home">
+    <div class="sidebar">
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              ATM Settings
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ul>
+            <li><a href="#">User</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Group</a></li>
+          </ul>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Business Setuo
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ul>
+            <li><a href="#">User</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Group</a></li>
+          </ul>
+        </mat-expansion-panel>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              User Management
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ul>
+            <li><a href="#">User</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Group</a></li>
+          </ul>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="container">
+      <div class="dash-board-header">
+        <h1 class="header-text">User Management</h1>
+        <button mat-raised-button color="primary" class="add-btn" (click)="open(content)">
+          <mat-icon>add</mat-icon>Add New
+        </button>
+      </div>
+
+      <div class="dash-bord">
+        <div class="fillter-form">
+          <form [formGroup]="form" (ngSubmit)="submit()">
+            <div style="font-size: 14px">
+              <mat-form-field class="example-form-field" appearance="outline">
+                <mat-label>
+                  <mat-icon>search</mat-icon> Search...
+                </mat-label>
+                <input matInput type="text" formControlName="search">
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" floatLabel="always">
+                <mat-label>Creation Date</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate formControlName="start" placeholder="Start date">
+                  <input matEndDate formControlName="end" placeholder="End date">
+                </mat-date-range-input>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" floatLabel="always">
+                <mat-label>User Status</mat-label>
+                <mat-select formControlName="selectedStatus">
+                  <mat-option *ngFor="let userStatu of userStatus" [value]="userStatu.value">
+                    {{userStatu.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <button mat-button color="primary">All fillter</button>
+            </div>
+          </form>
+        </div>
+        <table class="table">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">User Name</th>
+              <th scope="col">Email Address</th>
+              <th scope="col">Group</th>
+              <th scope="col">Status</th>
+              <th scope="col">Created on</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let user of users">
+              <td>
+                <label class="custom-checkbox" tab-index="0" aria-label="Checkbox Label">
+                  <input type="checkbox">
+                  <span class="checkmark"></span>
+                </label>
+              </td>
+              <td>{{user.name}}</td>
+              <td>{{user.userName}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.userGroup}}</td>
+              <td>{{user.userStatus}}</td>
+              <td>{{user.created *1000| date:'MMM d, y'}}</td>
+
+            </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h1 class="modal-title" id="modal-basic-title">Add New User</h1>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="saveForm" (ngSubmit)="saveUser()">
+
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+        <div class="input-group">
+          <input id="fullName" class="form-control" formControlName="name" placeholder="Enter full name">
+        </div>
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched || submittedSaveorm)" class="alert alert-danger">
+          Full Name is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="userName">User Name</label>
+        <div class="input-group">
+          <input id="userName" class="form-control" formControlName="userName" placeholder="Enter username">
+        </div>
+        <div *ngIf="userName?.invalid && (userName?.dirty || userName?.touched || submittedSaveorm)" class="alert alert-danger">
+          User Name is required.
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-group">
+          <input id="email" name="email" class="form-control" formControlName="email"
+            placeholder="Enter user email address">
+        </div>
+
+        <div *ngIf="email?.invalid && (email?.dirty || email?.touched|| submittedSaveorm)" class="alert alert-danger">
+          <div *ngIf="email?.errors?.['required']">
+            email is required.
+          </div>
+          <div *ngIf="email?.errors?.['email']">
+            Please enter a valid Email.
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">User Group</label>
+        <select class="form-control" id="exampleFormControlSelect1" formControlName="group">
+          <option *ngFor="let userStatu of userGroups" [value]="userStatu.value">{{userStatu.viewValue}}</option>
+        </select>
+        <div *ngIf="group?.invalid && (group?.dirty || group?.touched|| submittedSaveorm)" class="alert alert-danger">
+          <div *ngIf="group?.errors?.['required']">
+            User Group is required.
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="exampleFormControlSelect1">Assign profile</label>
+        <select class="form-control" id="exampleFormControlSelect1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancle</button>
+        <button mat-raised-button type="submit" color="primary" class="save-btn"
+          (click)="email?.invalid ||name?.invalid||userName?.invalid||group?.invalid || modal.close('Save click')">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+
+</ng-template>

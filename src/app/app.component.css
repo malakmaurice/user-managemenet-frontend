@@ -1,0 +1,159 @@
+body{
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #e9ecef;
+}
+* {
+  box-sizing: border-box;
+}
+
+.custom-checkbox {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+}
+mat-form-field {
+margin-right: 12px;
+}
+.custom-checkbox .checkmark {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #222;
+  display: inline-block;
+  border-radius: 3px;
+  background: green url(https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/White_check.svg/1200px-White_check.svg.png) center/1250% no-repeat;
+  transition: background-size 0.2s ease;
+}
+
+.custom-checkbox input:checked+.checkmark {
+  background-size: 60%;
+  transition: background-size 0.25s cubic-bezier(0.7, 0, 0.18, 1.24);
+}
+
+.custom-checkbox input {
+  display: none;
+}
+::ng-deep.mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: white !important;
+  padding: 0.5em 0.5em 0 0.5em !important;
+}
+
+
+.mat-form-field{
+  margin-bottom: 10px;
+}
+
+::ng-deep.mat-form-field-wrapper{
+  padding-bottom: 0px;
+}
+::ng-deep .mat-form-field-underline {
+  display: none;
+  
+}
+.container{
+  max-width: 1350px;
+  margin-left: 18%;
+}
+.dash-bord{
+  background-color: white;
+  border: 1px solid rgb(0, 0, 0,0.2);
+  border-radius: 7px;
+}
+.fillter-form{
+  padding: 25px 25px 0 25px;
+}
+.dash-board-header{
+ padding-top: 16px;
+
+ display: flex;
+ justify-content: space-between;
+}
+
+.add-btn{
+  background-color: green;
+  margin-bottom: 16px;
+}
+.save-btn{
+  background-color: green;
+}
+
+::ng-deep ngb-modal-backdrop{
+    z-index: 0 !important;
+  
+}
+.modal-body ,.modal-footer{
+  background-color: #e9ecef;
+}
+.modal-footer{
+  border-top: 1px solid rgb(0, 0, 0,0.2);
+}
+.modal-header{
+background-color: rgb(3, 20, 46);
+color: white;
+font-size: 28px;
+font-weight: 900;
+padding-bottom: 0;
+}
+button.close{
+  color: white !important;
+  opacity: 1 !important;
+}
+/*************************
+**************************/
+.home{
+  display: flex;
+}
+.sidebar{
+  height: 100%; /* Full-height: remove this if you want "auto" height */
+  width: 18%; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 0;
+  background-color: rgb(3, 20, 46); /* Black */
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+.mat-form-field + .mat-form-field {
+  margin-left: 8px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  background-color: rgb(255,255,255,0.2);
+}
+
+.sidebar li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+  color: rgb(255, 255, 255,0.5);
+}
+
+/* Change the link color on hover */
+.sidebar li a:hover {
+  background-color: rgb(0, 0, 0,0.2);
+  color: green;
+}
+.mat-expansion-panel {
+  margin-right: 10px;
+background-color: transparent;}
+.mat-expansion-panel-header-title{
+  color:  rgb(255, 255, 255,0.5);;
+}
+::ng-deep.mat-expansion-panel-body{
+  padding: 0px !important;
+}
+::ng-deep.mat-expansion-indicator::after{
+  color: rgb(255, 255, 255,0.5) !important ; 
+}
+input.ng-invalid.ng-touched{
+  border: 1px solid red;    
+}
